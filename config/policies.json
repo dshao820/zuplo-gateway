@@ -2,6 +2,7 @@
   "policies": [
     {
       "name": "add-backend-secret",
+      "policyType": "custom-code-inbound",
       "handler": {
         "export": "default",
         "module": "$import(./modules/add-backend-secret)"
