@@ -7,6 +7,46 @@
         "export": "default",
         "module": "$import(./modules/add-backend-secret)"
       }
+    },
+    {
+      "handler": {
+        "export": "OktaJwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "allowUnauthenticatedRequests": false,
+          "audience": "my-zuploapi",
+          "issuerUrl": "https://demo-tearice.okta.com/oauth2/aus142oblmazBzsdf698",
+          "oAuthResourceMetadataEnabled": false
+        }
+      },
+      "name": "okta-jwt-auth-inbound",
+      "policyType": "okta-jwt-auth-inbound"
+    },
+    {
+      "handler": {
+        "export": "ApiKeyInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "allowUnauthenticatedRequests": false,
+          "cacheTtlSeconds": 60
+        }
+      },
+      "name": "api-key-inbound",
+      "policyType": "api-key-inbound"
+    },
+    {
+      "handler": {
+        "export": "SecretMaskingOutboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "additionalPatterns": [
+            "(?<=\\b[A-Z][12])[0-9]{5}(?=[0-9]{3}\\b)"
+          ],
+          "mask": "*****"
+        }
+      },
+      "name": "secret-masking-outbound",
+      "policyType": "secret-masking-outbound"
     }
   ]
 }
