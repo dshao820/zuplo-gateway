@@ -11,7 +11,9 @@
         "summary": "Health check",
         "operationId": "getHealth",
         "responses": {
-          "200": { "description": "Service is healthy" }
+          "200": {
+            "description": "Service is healthy"
+          }
         },
         "x-zuplo-route": {
           "corsPolicy": "none",
@@ -26,7 +28,9 @@
             "inbound": []
           }
         },
-        "tags": ["Products"]
+        "tags": [
+          "Products"
+        ]
       }
     },
     "/products": {
@@ -34,7 +38,9 @@
         "summary": "List products",
         "operationId": "listProducts",
         "responses": {
-          "200": { "description": "A list of products" }
+          "200": {
+            "description": "A list of products"
+          }
         },
         "x-zuplo-route": {
           "corsPolicy": "none",
@@ -46,10 +52,17 @@
             }
           },
           "policies": {
-            "inbound": ["add-backend-secret"]
+            "inbound": [
+              "add-backend-secret"
+            ],
+            "outbound": [
+              "secret-masking-outbound"
+            ]
           }
         },
-        "tags": ["Products"]
+        "tags": [
+          "Products"
+        ]
       },
       "post": {
         "summary": "Create a product",
@@ -58,13 +71,19 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ProductInput" }
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
             }
           }
         },
         "responses": {
-          "201": { "description": "Product created" },
-          "400": { "description": "Invalid input" }
+          "201": {
+            "description": "Product created"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
         },
         "x-zuplo-route": {
           "corsPolicy": "none",
@@ -76,10 +95,15 @@
             }
           },
           "policies": {
-            "inbound": ["add-backend-secret"]
+            "inbound": [
+              "add-backend-secret",
+              "okta-jwt-auth-inbound"
+            ]
           }
         },
-        "tags": ["Products"]
+        "tags": [
+          "Products"
+        ]
       }
     },
     "/products/{id}": {
@@ -87,11 +111,22 @@
         "summary": "Get a product",
         "operationId": "getProduct",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "A product" },
-          "404": { "description": "Not found" }
+          "200": {
+            "description": "A product"
+          },
+          "404": {
+            "description": "Not found"
+          }
         },
         "x-zuplo-route": {
           "corsPolicy": "none",
@@ -103,28 +138,49 @@
             }
           },
           "policies": {
-            "inbound": ["add-backend-secret"]
+            "inbound": [
+              "add-backend-secret"
+            ],
+            "outbound": [
+              "secret-masking-outbound"
+            ]
           }
         },
-        "tags": ["Products"]
+        "tags": [
+          "Products"
+        ],
+        "description": ""
       },
       "put": {
         "summary": "Update a product",
         "operationId": "updateProduct",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ProductInput" }
+              "schema": {
+                "$ref": "#/components/schemas/ProductInput"
+              }
             }
           }
         },
         "responses": {
-          "200": { "description": "Product updated" },
-          "404": { "description": "Not found" }
+          "200": {
+            "description": "Product updated"
+          },
+          "404": {
+            "description": "Not found"
+          }
         },
         "x-zuplo-route": {
           "corsPolicy": "none",
@@ -136,20 +192,35 @@
             }
           },
           "policies": {
-            "inbound": ["add-backend-secret"]
+            "inbound": [
+              "add-backend-secret"
+            ]
           }
         },
-        "tags": ["Products"]
+        "tags": [
+          "Products"
+        ]
       },
       "delete": {
         "summary": "Delete a product",
         "operationId": "deleteProduct",
         "parameters": [
-          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "Product deleted" },
-          "404": { "description": "Not found" }
+          "200": {
+            "description": "Product deleted"
+          },
+          "404": {
+            "description": "Not found"
+          }
         },
         "x-zuplo-route": {
           "corsPolicy": "none",
@@ -161,10 +232,62 @@
             }
           },
           "policies": {
-            "inbound": ["add-backend-secret"]
+            "inbound": [
+              "add-backend-secret"
+            ]
           }
         },
-        "tags": ["Products"]
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/mcp": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "post": {
+        "summary": "MCP Server",
+        "description": "Default MCP Server",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "mcpServerHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "operations": [
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "getHealth"
+                },
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "listProducts"
+                },
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "createProduct"
+                },
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "getProduct"
+                },
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "updateProduct"
+                },
+                {
+                  "file": "./config/routes.oas.json",
+                  "id": "deleteProduct"
+                }
+              ]
+            }
+          },
+          "policies": {
+            "inbound": []
+          }
+        },
+        "operationId": "mcp-252852c0"
       }
     }
   },
@@ -178,11 +301,21 @@
     "schemas": {
       "ProductInput": {
         "type": "object",
-        "required": ["name", "price"],
+        "required": [
+          "name",
+          "price"
+        ],
         "properties": {
-          "name": { "type": "string" },
-          "price": { "type": "number" },
-          "currency": { "type": "string", "default": "USD" }
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string",
+            "default": "USD"
+          }
         }
       }
     }

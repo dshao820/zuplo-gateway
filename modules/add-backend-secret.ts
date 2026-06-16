@@ -1,6 +1,5 @@
-import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
-
+import { ZuploContext, ZuploRequest, environment } from "@zuplo/runtime";
 export default async function (request: ZuploRequest, context: ZuploContext) {
-  request.headers.set("x-backend-secret", context.env.BACKEND_SECRET);
+  request.headers.set("x-backend-secret", environment.BACKEND_SECRET);
   return request;
 }
