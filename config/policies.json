@@ -1,3 +1,11 @@
 {
-  "policies": []
+  "policies": [
+    {
+      "name": "add-backend-secret",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/add-backend-secret)"
+      }
+    }
+  ]
 }

@@ -64,6 +64,9 @@
             "options": {
               "baseUrl": "https://todo.zuplo.io"
             }
+          },
+          "policies": {
+            "inbound": ["add-backend-secret"]
           }
         },
         "tags": ["Todo"]
@@ -116,6 +119,9 @@
             "options": {
               "baseUrl": "https://todo.zuplo.io"
             }
+          },
+          "policies": {
+            "inbound": ["add-backend-secret"]
           }
         },
         "tags": ["Todo"]
@@ -184,6 +190,9 @@
             "options": {
               "baseUrl": "https://todo.zuplo.io"
             }
+          },
+          "policies": {
+            "inbound": ["add-backend-secret"]
           }
         },
         "tags": ["Todo"]
@@ -219,6 +228,9 @@
             "options": {
               "baseUrl": "https://todo.zuplo.io"
             }
+          },
+          "policies": {
+            "inbound": ["add-backend-secret"]
           }
         },
         "tags": ["Todo"]
