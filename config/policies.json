@@ -47,6 +47,28 @@
       },
       "name": "secret-masking-outbound",
       "policyType": "secret-masking-outbound"
+    },
+    {
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/ab-test-inbound)"
+      },
+      "name": "ab-test-inbound",
+      "policyType": "custom-code-inbound"
+    },
+    {
+      "handler": {
+        "export": "CognitoJwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "allowUnauthenticatedRequests": false,
+          "oAuthResourceMetadataEnabled": false,
+          "region": "us-east-1",
+          "userPoolId": "$env(AWS_COGNITO_USER_POOL_ID)"
+        }
+      },
+      "name": "cognito-jwt-auth-inbound",
+      "policyType": "cognito-jwt-auth-inbound"
     }
   ]
 }

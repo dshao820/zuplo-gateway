@@ -199,7 +199,8 @@
         },
         "tags": [
           "Products"
-        ]
+        ],
+        "description": ""
       },
       "delete": {
         "summary": "Delete a product",
@@ -239,7 +240,8 @@
         },
         "tags": [
           "Products"
-        ]
+        ],
+        "description": ""
       }
     },
     "/mcp": {
