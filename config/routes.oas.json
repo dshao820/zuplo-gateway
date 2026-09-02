@@ -624,7 +624,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "https://odin-demo-main-cf44897.d2.zuplo.dev"
+              "baseUrl": "${env.BACKEND_URL}"
             }
           },
           "policies": {
