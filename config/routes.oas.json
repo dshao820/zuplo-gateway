@@ -212,7 +212,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "add-backend-secret"
+            ]
           }
         }
       }
@@ -614,6 +616,21 @@
                 }
               }
             }
+          }
+        },
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://odin-demo-main-cf44897.d2.zuplo.dev"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "add-backend-secret"
+            ]
           }
         }
       }
