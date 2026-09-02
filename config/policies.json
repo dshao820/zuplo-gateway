@@ -47,6 +47,19 @@
       },
       "name": "secret-masking-outbound",
       "policyType": "secret-masking-outbound"
+    },
+    {
+      "handler": {
+        "export": "OktaJwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "oAuthResourceMetadataEnabled": true,
+          "audience": "https://odin-demo-main-1cd2c4f.zuplo.app/mcp",
+          "issuerUrl": "https://demo-tearice.okta.com/oauth2/aus17473ylneqsiRk698"
+        }
+      },
+      "name": "mcp-okta-oauth-inbound",
+      "policyType": "okta-jwt-auth-inbound"
     }
   ]
 }

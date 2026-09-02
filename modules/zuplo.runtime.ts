@@ -1,4 +1,4 @@
-import { RuntimeExtensions } from "@zuplo/runtime";
+import { RuntimeExtensions, OAuthProtectedResourcePlugin } from "@zuplo/runtime";
 import { McpGatewayPlugin } from "@zuplo/runtime/mcp-gateway";
 
 // To enable the optional examples below, install the relevant package(s) and
@@ -22,6 +22,22 @@ export function runtimeInit(runtime: RuntimeExtensions) {
   runtime.addPlugin(
     new McpGatewayPlugin({
       // basePath: "/", // defaults to /__zuplo
+    })
+  );
+
+  // --- OAuth Protected Resource (RFC 9728) ---------------------------------
+  // Registers the .well-known/oauth-protected-resource route so MCP clients can
+  // discover which authorization server issues tokens for this gateway.
+  // Pairs with the okta-jwt-auth-inbound policy on /mcp, which must have
+  // "oAuthResourceMetadataEnabled": true so its 401 responses carry a
+  // WWW-Authenticate header pointing at this endpoint.
+  // Docs: https://zuplo.com/docs/programmable-api/oauth-protected-resource-plugin
+  runtime.addPlugin(
+    new OAuthProtectedResourcePlugin({
+      authorizationServers: [
+        "https://demo-tearice.okta.com/oauth2/aus17473ylneqsiRk698",
+      ],
+      resourceName: "Zuplo Demo MCP",
     })
   );
 
