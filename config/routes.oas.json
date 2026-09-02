@@ -366,8 +366,7 @@
           },
           "policies": {
             "inbound": [
-              "add-backend-secret",
-              "okta-jwt-auth-inbound"
+              "add-backend-secret"
             ]
           }
         }
@@ -681,7 +680,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "mcp-okta-oauth-inbound"
+            ]
           }
         },
         "operationId": "mcp-252852c0"
