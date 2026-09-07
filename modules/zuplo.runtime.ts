@@ -38,7 +38,7 @@ export function runtimeInit(runtime: RuntimeExtensions) {
         "https://demo-tearice.okta.com/oauth2/aus17473ylneqsiRk698",
       ],
       resourceName: "Zuplo Demo MCP",
-      scopesSupported: ["mcp:access", "openid", "profile", "email"],
+      scopesSupported: ["mcp:access", "openid", "profile", "email", "offline_access"],
     })
   );
 
