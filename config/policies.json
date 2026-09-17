@@ -60,6 +60,22 @@
       },
       "name": "mcp-okta-oauth-inbound",
       "policyType": "okta-jwt-auth-inbound"
+    },
+    {
+      "handler": {
+        "export": "RequestValidationInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "includeRequestInLogs": true,
+          "logLevel": "info",
+          "validateBody": "reject-and-log",
+          "validateHeaders": "none",
+          "validatePathParameters": "log-only",
+          "validateQueryParameters": "log-only"
+        }
+      },
+      "name": "request-validation-inbound",
+      "policyType": "request-validation-inbound"
     }
   ]
 }
